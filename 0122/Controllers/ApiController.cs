@@ -13,13 +13,19 @@ namespace _0122.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            System.Threading.Thread.Sleep(5000);
+            return Content("<h2>Conctent,你好</h2>","text/plain",System.Text.Encoding.UTF8);
         }
 
         public IActionResult Cities()
         {
             var cities = _dbContext.Addresses.Select(a => a.City).Distinct();
             return Json(cities);
+        }
+
+        public IActionResult First()
+        {
+            return View();
         }
     }
 }

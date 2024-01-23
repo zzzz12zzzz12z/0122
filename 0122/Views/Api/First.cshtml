@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "First";
+}
+
+<h1>First</h1>
+
+<button id="button1" class="btn-primary mb-3">Ajax</button>
+<div id="div1" class="alert alert-info"></div>
+
+@section Scripts{
+<script>
+    const btn = document.querySelector("#button1");
+    const theDiv = document.querySelector("#div1");
+    btn.addEventListener("click",async() => {
+        try {
+            const response = await fetch('@Url.Content("~/api/index")');
+        }
+            if (!response.ok) {
+            throw new Error(response.status);
+        }
+        const data = await response.text();
+        theDiv.innerHTML = `<h2>${data}</h2>`;
+    }catch (error) {
+        theDiv.innerHTML = `<h2>${error}</h2>`;
+    } finally {
+        console.log("done");
+    }
+
+
+
+        fetch('@Url.Content("~/api/index")')
+            .then(response => {
+                
+               return response.text();
+            })
+            .then(data => {
+                //讀出資料,顯示資料
+                theDiv.innerHTML = `<h2>${data}</h2>`; 
+
+            })
+         })
+         
+
+</script>
+}
